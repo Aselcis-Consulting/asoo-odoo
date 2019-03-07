@@ -1,0 +1,58 @@
+server_installation:
+  update:
+    sudo: true
+    commands:
+      - 'apt update'
+  git:
+    sudo: true
+    commands:
+      - 'apt -y install git'
+  curl:
+    sudo: true
+    commands:
+      - 'apt -y install curl'
+  docker:
+    sudo: true
+    commands:
+      - 'curl -fsSL get.docker.com -o get-docker.sh'
+      - 'sh get-docker.sh'
+      - 'rm get-docker.sh'
+  docker-compose:
+    sudo: true
+    commands:
+      - 'apt -y install python-pip'
+      - 'pip install docker-compose'
+  workspace-chmod:
+    sudo: true
+    commands:
+      - 'chmod 757 /opt/'
+environment_info:
+  application: 'odoo'
+  application_version: '11.0'
+  application_service: 'web'
+  git_submodule_path: 'addons'
+  nginx_service: 'web'
+  nginx_virtual_port: '8069'
+  odoo_config: 'config/odoo.conf'
+  workspace: '/opt/${object.server_id.technical_name}-${object.name}-${object.id}'
+  process_files:
+    - 'docker-compose.yml'
+    - 'config/odoo.conf'
+    - 'config/odoo-test.conf'
+environment_installation:
+    entrypoint_chmod:
+      commands:
+        - 'chmod 655 entrypoint.sh'
+environment_test_info:
+  test_error_regex: '^(?:\d{4}-\d\d-\d\d \d\d:\d\d:\d\d,\d{3} \d+ (?:ERROR|CRITICAL) )|(?:Traceback \(most recent call last\):)$'
+  test_warn_regex: '^\d{4}-\d\d-\d\d \d\d:\d\d:\d\d,\d{3} \d+ WARNING '
+  script_test:
+    service: 'web'
+    commands:
+      - 'odoo --test-enable -c /etc/odoo/odoo-test.conf --log-level=test --stop-after-init -i base'
+  script_after:
+    sudo: true
+    commands:
+      - 'docker-compose stop web'
+      - 'docker-compose exec -T db dropdb -U odoo odoo-test'
+      - 'docker-compose start web'
