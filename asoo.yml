@@ -1,7 +1,7 @@
 deploy_info:
   private_submodules:
     - git@github.com:Aselcis-Consulting/enterprise.git
-server_installation:
+server_setup:
   update:
     sudo: true
     commands:
@@ -44,10 +44,10 @@ environment_info:
     - 'docker-compose.yml'
     - 'config/odoo.conf'
     - 'config/odoo-test.conf'
-environment_installation:
-    entrypoint_chmod:
-      commands:
-        - 'chmod 655 entrypoint.sh'
+environment_setup:
+  entrypoint_chmod:
+    commands:
+      - 'chmod 655 entrypoint.sh'
 environment_test_info:
   test_mute: true
   test_error_regex: '^(?:\d{4}-\d\d-\d\d \d\d:\d\d:\d\d,\d{3} \d+ (?:ERROR|CRITICAL) )|(?:Traceback \(most recent call last\):)$'
