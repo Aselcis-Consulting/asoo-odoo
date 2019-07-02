@@ -11,23 +11,34 @@ RUN set -x; \
             ca-certificates \
             curl \
             dirmngr \
-            fonts-noto-cjk \
-            gnupg \
-            libssl1.0-dev \
             node-less \
-            python3-pip \
-            python3-pyldap \
-            python3-qrcode \
-            python3-renderpm \
-            python3-setuptools \
-            python3-vobject \
-            python3-watchdog \
-            xz-utils \
-        && curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.stretch_amd64.deb \
-        && echo '7e35a63f9db14f93ec7feeb0fce76b30c08f2057 wkhtmltox.deb' | sha1sum -c - \
-        && dpkg --force-depends -i wkhtmltox.deb\
+            python-gevent \
+            python-ldap \
+            python-pip \
+            python-qrcode \
+            python-renderpm \
+            python-support \
+            python-vobject \
+            python-watchdog \
+        && curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.jessie_amd64.deb \
+        && echo '4d104ff338dc2d2083457b3b1e9baab8ddf14202 wkhtmltox.deb' | sha1sum -c - \
+        && dpkg --force-depends -i wkhtmltox.deb \
         && apt-get -y install -f --no-install-recommends \
-        && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
+        && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false npm \
+        && rm -rf /var/lib/apt/lists/* wkhtmltox.deb \
+        && pip install psycogreen==1.0
+
+# install latest postgresql-client
+RUN set -x; \
+        echo 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' > etc/apt/sources.list.d/pgdg.list \
+        && export GNUPGHOME="$(mktemp -d)" \
+        && repokey='B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8' \
+        && gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "${repokey}" \
+        && gpg --armor --export "${repokey}" | apt-key add - \
+        && rm -rf "$GNUPGHOME" \
+        && apt-get update  \
+        && apt-get install -y postgresql-client \
+        && rm -rf /var/lib/apt/lists/*
 
 # CUSTOMIZATIONS
 
@@ -44,24 +55,10 @@ RUN set -x; \
         && apt-get install -y postgresql-client \
         && rm -rf /var/lib/apt/lists/*
 
-# Install rtlcss (on Debian stretch)
-RUN set -x;\
-    echo "deb http://deb.nodesource.com/node_8.x stretch main" > /etc/apt/sources.list.d/nodesource.list \
-    && export GNUPGHOME="$(mktemp -d)" \
-    && repokey='9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280' \
-    && gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "${repokey}" \
-    && gpg --armor --export "${repokey}" | apt-key add - \
-    && gpgconf --kill all \
-    && rm -rf "$GNUPGHOME" \
-    && apt-get update \
-    && apt-get install -y nodejs \
-    && npm install -g rtlcss \
-    && rm -rf /var/lib/apt/lists/*
-
 # Install Odoo
-ENV ODOO_VERSION 12.0
+ENV ODOO_VERSION 10.0
 ARG ODOO_RELEASE=20190424
-ARG ODOO_SHA=3885be6791b9b8c2a74115299e57213c71db4363
+ARG ODOO_SHA=1f4668c0e3b1597ffa931994952cf6fce87df37e
 RUN set -x; \
         curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
         && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
@@ -71,7 +68,6 @@ RUN set -x; \
         && rm -rf /var/lib/apt/lists/* odoo.deb
 
 # Copy entrypoint script and Odoo configuration file
-RUN pip3 install num2words xlwt
 COPY ./entrypoint.sh /
 COPY ./config/odoo.conf /etc/odoo/
 RUN chown odoo /etc/odoo/odoo.conf
@@ -82,7 +78,7 @@ RUN mkdir -p /mnt/extra-addons \
 VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
 
 # Expose Odoo services
-EXPOSE 8069
+EXPOSE 8069 8071
 
 # Set the default config file
 ENV ODOO_RC /etc/odoo/odoo.conf
