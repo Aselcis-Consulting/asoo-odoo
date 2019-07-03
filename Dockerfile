@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:jessie
 LABEL maintainer="Aselcis Consulting S.L <info@aselcis.com>"
 
 # Generate locale C.UTF-8 for postgres and general locale data
@@ -41,19 +41,53 @@ RUN set -x; \
         && rm -rf /var/lib/apt/lists/*
 
 # CUSTOMIZATIONS
-
-# install latest postgresql-client
 RUN set -x; \
-        echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' > etc/apt/sources.list.d/pgdg.list \
-        && export GNUPGHOME="$(mktemp -d)" \
-        && repokey='B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8' \
-        && gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "${repokey}" \
-        && gpg --armor --export "${repokey}" | apt-key add - \
-        && gpgconf --kill all \
-        && rm -rf "$GNUPGHOME" \
-        && apt-get update  \
-        && apt-get install -y postgresql-client \
-        && rm -rf /var/lib/apt/lists/*
+  mkdir /deb_depends \
+  && curl -o /deb_depends/libxslt1.1.deb -SL http://ftp.de.debian.org/debian/pool/main/libx/libxslt/libxslt1.1_1.1.28-2+deb8u3_amd64.deb \
+  && curl -o /deb_depends/libxml2.deb -SL http://security.debian.org/debian-security/pool/updates/main/libx/libxml2/libxml2_2.9.1+dfsg1-5+deb8u7_amd64.deb \
+  && curl -o /deb_depends/python-crypto.deb -SL http://ftp.de.debian.org/debian/pool/main/p/python-crypto/python-crypto_2.6.1-5+deb8u1_amd64.deb \
+  && curl -o /deb_depends/libssl-dev.deb -SL http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl-dev_1.0.1t-1+deb8u11_amd64.deb \
+  && curl -o /deb_depends/libffi-dev.deb -SL http://ftp.de.debian.org/debian/pool/main/libf/libffi/libffi-dev_3.1-2+deb8u1_amd64.deb \
+  && curl -o /deb_depends/python-lxml.deb -SL http://ftp.de.debian.org/debian/pool/main/l/lxml/python-lxml_3.4.0-1_amd64.deb\
+  && curl -o /deb_depends/libavahi-client3.deb -SL http://ftp.de.debian.org/debian/pool/main/a/avahi/libavahi-client3_0.6.31-5_amd64.deb \
+  && curl -o /deb_depends/libavahi-common3.deb -SL http://ftp.de.debian.org/debian/pool/main/a/avahi/libavahi-common3_0.6.31-5_amd64.deb \
+  && curl -o /deb_depends/libdbus-1-3.deb -SL http://ftp.de.debian.org/debian/pool/main/d/dbus/libdbus-1-3_1.8.22-0+deb8u1_amd64.deb \
+  && curl -o /deb_depends/libavahi-common-data.deb -SL http://ftp.de.debian.org/debian/pool/main/a/avahi/libavahi-common-data_0.6.31-5_amd64.deb \
+  && curl -o /deb_depends/libcups2.deb -SL http://security.debian.org/debian-security/pool/updates/main/c/cups/libcups2_1.7.5-11+deb8u4_amd64.deb \
+  && curl -o /deb_depends/python-cups.deb -SL http://ftp.de.debian.org/debian/pool/main/p/python-cups/python-cups_1.9.73-2+b1_amd64.deb \
+  && dpkg --force-depends -i /deb_depends/*.deb \
+  && apt-get update \
+  && apt-get -y install -f --no-install-recommends \
+  && rm -rf \
+  /var/lib/apt/lists/* python-crypto.deb \
+  /var/lib/apt/lists/* libssl-dev.deb \
+  /var/lib/apt/lists/* libffi-dev.deb \
+  /var/lib/apt/lists/* python-lxml.deb \
+  && rm -dfr /deb_depends
+
+RUN set -x; \
+  apt-get update \
+  && apt-get -y install --no-install-recommends build-essential python-dev \
+  && pip install setuptools==20.7.0 \
+  && pip install \
+      unidecode==0.4.19 \
+      unicodecsv==0.14.1 \
+      python-stdnum==1.1 \
+      cachetools==2.0.1 \
+      unittest2==1.1.0 \
+      xlrd==0.9.4 \
+      xlsxwriter==0.9.3 \
+      oca-decorators==0.0.1 \
+      pycryptodome==3.6.1 \
+      cryptography==1.2.3 \
+      pyOpenSSL==0.15.1 \
+      xmlsig==0.1.1 \
+      ofxparse==0.15 \
+      zpl2==1.1 \
+      openupgradelib==1.3.0
+
+RUN set -x; \
+  pip install zeep==2.2.0
 
 # Install Odoo
 ENV ODOO_VERSION 10.0
