@@ -84,6 +84,7 @@ RUN set -x; \
       xmlsig==0.1.1 \
       ofxparse==0.15 \
       zpl2==1.1 \
+      simplejson==3.16.0 \
       openupgradelib==1.3.0
 
 RUN set -x; \
