@@ -134,10 +134,6 @@
 	path = addons/OCA/mis-builder
 	url = https://github.com/OCA/mis-builder.git
 	branch = 10.0
-[submodule "addons/OCA/credit-control"]
-	path = addons/OCA/credit-control
-	url = https://github.com/OCA/credit-control.git
-	branch = 10.0
 [submodule "addons/OCA/community-data-files"]
 	path = addons/OCA/community-data-files
 	url = https://github.com/OCA/community-data-files.git
