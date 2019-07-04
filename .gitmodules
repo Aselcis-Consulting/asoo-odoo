@@ -154,3 +154,7 @@
 	path = addons/asoo-tools
 	url = https://github.com/Aselcis-Consulting/asoo-tools.git
 	branch = 10.0
+[submodule "addons/OCA/pos"]
+	path = addons/OCA/pos
+	url = https://github.com/OCA/pos.git
+	branch = 10.0
