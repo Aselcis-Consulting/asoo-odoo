@@ -29,7 +29,29 @@ RUN set -x; \
         && apt-get -y install -f --no-install-recommends \
         && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
-# CUSTOMIZATIONS
+# OCA python libraries
+RUN set -x; \
+        pip3 install fdfgen==0.16.1 \
+        xmlsig==0.1.1 \
+        pyopenssl==17.5.0 \
+        phonenumbers==8.8.8 \
+        unicodecsv==0.14.1 \
+        unidecode==0.04.21 \
+        cachetools==2.1.0 \
+        unittest2==1.1.0 \
+        xlwt==1.3.0 \
+        xlrd==1.1.0 \
+        numpy==1.14.2 \
+        pycryptodome==3.6.1 \
+        zeep==2.5.0 \
+        pycountry==18.5.20 \
+        checksumdir==1.1.4 \
+        raven==6.8.0 \
+        pysftp==0.2.9 \
+        acme-tiny==4.0.4 \
+        IPy==0.83 \
+        bokeh==0.12.7 \
+        openupgradelib==2.0.0
 
 # install latest postgresql-client
 RUN set -x; \
@@ -60,8 +82,8 @@ RUN set -x;\
 
 # Install Odoo
 ENV ODOO_VERSION 12.0
-ARG ODOO_RELEASE=20190424
-ARG ODOO_SHA=3885be6791b9b8c2a74115299e57213c71db4363
+ARG ODOO_RELEASE=20190711
+ARG ODOO_SHA=4682069365f2f01684308a96092a31f1061ecb92
 RUN set -x; \
         curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
         && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
