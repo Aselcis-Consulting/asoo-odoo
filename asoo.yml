@@ -1,6 +1,7 @@
 deploy_info:
   private_submodules:
     - git@github.com:Aselcis-Consulting/enterprise.git
+    - git@github.com:Aselcis-Consulting/asoo-tools.git
 
 server_setup:
   update:
