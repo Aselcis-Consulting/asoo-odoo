@@ -162,3 +162,7 @@
 	path = addons/OCA/multi-company
 	url = https://github.com/OCA/multi-company.git
 	branch = 12.0
+[submodule "addons/OCA/server-ux"]
+	path = addons/OCA/server-ux
+	url = https://github.com/OCA/server-ux.git
+	branch = 12.0
