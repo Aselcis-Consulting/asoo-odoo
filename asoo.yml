@@ -115,14 +115,14 @@ backup:
         description: 'Downloading backup file'
         sudo: true
         commands:
-          - 'rm -fr ${ctx.get("workspace")}/${getattr(ctx.get("object"), "name", False)}'
-          - 'cd ${ctx.get("workspace")} && swift --os-auth-token ${ctx.get("container").openstack_token} --os-storage-url ${ctx.get("container").openstack_url} download ${ctx.get("container").name} ${getattr(ctx.get("object"), "name", False)} -o ${getattr(ctx.get("object"), "name", False)}'
+          - 'rm -fr ${ctx.get("workspace")}/${getattr(ctx.get("object", object()), "name", False)}'
+          - 'cd ${ctx.get("workspace")} && swift --os-auth-token ${ctx.get("container").openstack_token} --os-storage-url ${ctx.get("container").openstack_url} download ${ctx.get("container").name} ${getattr(ctx.get("object", object()), "name", False)} -o ${getattr(ctx.get("object", object()), "name", False)}'
       untar:
         description: 'Decompressing backup'
         sudo: true
         commands:
-          - 'tar -xvjf ${ctx.get("workspace")}/${getattr(ctx.get("object"), "name", False)} -C ${ctx.get("workspace")} &>/dev/null'
-          - 'rm -fr ${ctx.get("workspace")}/${getattr(ctx.get("object"), "name", False)}'
+          - 'tar -xvjf ${ctx.get("workspace")}/${getattr(ctx.get("object", object()), "name", False)} -C ${ctx.get("workspace")} &>/dev/null'
+          - 'rm -fr ${ctx.get("workspace")}/${getattr(ctx.get("object", object()), "name", False)}'
       dump:
         description: 'Restoring PostgreSQL dump'
         sudo: true
