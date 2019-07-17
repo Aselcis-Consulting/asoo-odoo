@@ -1,7 +1,6 @@
 deploy_info:
   private_submodules:
     - git@github.com:Aselcis-Consulting/enterprise.git
-    - git@github.com:Aselcis-Consulting/asoo-tools.git
 
 server_setup:
   update:
@@ -16,6 +15,10 @@ server_setup:
     sudo: true
     commands:
       - 'apt -y install curl'
+  swift:
+    sudo: true
+    commands:
+      - 'apt -y install python3-swiftclient'
   docker:
     sudo: true
     commands:
@@ -67,3 +70,74 @@ environment_test_info:
       - 'docker-compose stop web'
       - 'docker-compose exec -T db dropdb -U odoo odoo-test'
       - 'docker-compose start web'
+
+backup:
+  format: 'tar.bz2'
+  create:
+    ensure_start: true
+    script:
+      dump:
+        description: 'Dumping PostgreSQL'
+        sudo: true
+        commands:
+          - 'docker-compose exec -T db pg_dumpall -U odoo > ${ctx.get("workspace")}/dump.sql'
+      filestore:
+        description: 'Copying Odoo filestore'
+        sudo: true
+        commands:
+          - 'docker cp ${object.docker_container_id("web")}:/var/lib/odoo/filestore ${ctx.get("workspace")}/filestore'
+      tar:
+        description: 'Compressing backup'
+        sudo: True
+        commands:
+          - 'cd ${ctx.get("backups_dir")} && tar -cvjf ${ctx.get("filename")} ${ctx.get("backup_name")}/. &>/dev/null'
+      rm_workspace:
+        description: 'Removing workspace'
+        sudo: true
+        commands:
+          - 'rm -dfr ${ctx.get("workspace")}'
+      upload:
+        description: 'Uploading backup'
+        sudo: true
+        commands:
+          - 'swift --os-auth-token ${ctx.get("container").openstack_token} --os-storage-url ${ctx.get("container").openstack_url} upload ${ctx.get("container").name} ${ctx.get("backups_dir")}/${ctx.get("filename")} --object-name ${ctx.get("filename")}'
+      rm_backup:
+        description: 'Removing backup file'
+        sudo: true
+        commands:
+          - 'rm -dfr ${ctx.get("backups_dir")}/${ctx.get("filename")}'
+  restore:
+    ensure_start: true
+    after_restart: true
+    remove_volumes: true
+    script:
+      download:
+        description: 'Downloading backup file'
+        sudo: true
+        commands:
+          - 'rm -fr ${ctx.get("workspace")}/${ctx.get("object").name}'
+          - 'cd ${ctx.get("workspace")} && swift --os-auth-token ${ctx.get("container").openstack_token} --os-storage-url ${ctx.get("container").openstack_url} download ${ctx.get("container").name} ${ctx.get("object").name} -o ${ctx.get("object").name}'
+      untar:
+        description: 'Decompressing backup'
+        sudo: true
+        commands:
+          - 'tar -xvjf ${ctx.get("workspace")}/${ctx.get("object").name} -C ${ctx.get("workspace")} &>/dev/null'
+          - 'rm -fr ${ctx.get("workspace")}/${ctx.get("object").name}'
+      dump:
+        description: 'Restoring PostgreSQL dump'
+        sudo: true
+        commands:
+          - 'docker cp ${ctx.get("backup_content")}/dump.sql ${object.docker_container_id("db")}:/'
+          - 'docker-compose exec -T db psql -U odoo -d postgres -f /dump.sql'
+          - 'docker-compose exec -T -u 0 db rm /dump.sql'
+      filestore:
+        description: 'Restoring Odoo filestore'
+        sudo: true
+        commands:
+          - 'docker cp ${ctx.get("backup_content")}/filestore/. ${object.docker_container_id("web")}:/var/lib/odoo/filestore'
+          - 'docker-compose exec -T -u 0 web chown -R odoo:odoo /var/lib/odoo/filestore'
+      clean:
+        description: 'Cleaning leftovers from the backup'
+        sudo: true
+        commands:
+          - 'rm -dfr ${ctx.get("workspace")}'
