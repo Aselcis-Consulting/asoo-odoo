@@ -162,3 +162,7 @@
 	path = addons/OCA/server-ux
 	url = https://github.com/OCA/server-ux.git
 	branch = 12.0
+[submodule "addons/Aselcis-Consulting/asoo-tools"]
+	path = addons/Aselcis-Consulting/asoo-tools
+	url = https://github.com/Aselcis-Consulting/asoo-tools.git
+	branch = 12.0
