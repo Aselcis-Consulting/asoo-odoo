@@ -14,10 +14,6 @@
 	path = addons/OCA/account-financial-reporting
 	url = https://github.com/OCA/account-financial-reporting.git
 	branch = 12.0
-[submodule "addons/OCA/account-financial-tools.git"]
-	path = addons/OCA/account-financial-tools.git
-	url = https://github.com/OCA/account-financial-tools.git
-	branch = 12.0
 [submodule "addons/OCA/account-invoice-reporting"]
 	path = addons/OCA/account-invoice-reporting
 	url = https://github.com/OCA/account-invoice-reporting.git
@@ -165,4 +161,8 @@
 [submodule "addons/Aselcis-Consulting/asoo-tools"]
 	path = addons/Aselcis-Consulting/asoo-tools
 	url = https://github.com/Aselcis-Consulting/asoo-tools.git
+	branch = 12.0
+[submodule "addons/OCA/account-financial-tools"]
+	path = addons/OCA/account-financial-tools
+	url = https://github.com/OCA/account-financial-tools.git
 	branch = 12.0
