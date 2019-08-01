@@ -29,31 +29,7 @@ RUN set -x; \
         && apt-get -y install -f --no-install-recommends \
         && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
-# OCA python libraries
-RUN set -x; \
-        pip3 install fdfgen==0.16.1 \
-        xmlsig==0.1.1 \
-        pyopenssl==17.5.0 \
-        phonenumbers==8.8.8 \
-        unicodecsv==0.14.1 \
-        unidecode==0.04.21 \
-        cachetools==2.1.0 \
-        unittest2==1.1.0 \
-        xlwt==1.3.0 \
-        xlrd==1.1.0 \
-        numpy==1.14.2 \
-        pycryptodome==3.6.1 \
-        zeep==2.5.0 \
-        pycountry==18.5.20 \
-        checksumdir==1.1.4 \
-        raven==6.8.0 \
-        pysftp==0.2.9 \
-        acme-tiny==4.0.4 \
-        IPy==0.83 \
-        bokeh==0.12.7 \
-        openupgradelib==2.0.0
-
-# install latest postgresql-client
+# Install latest postgresql-client
 RUN set -x; \
         echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' > etc/apt/sources.list.d/pgdg.list \
         && export GNUPGHOME="$(mktemp -d)" \
@@ -91,6 +67,10 @@ RUN set -x; \
         && apt-get update \
         && apt-get -y install -f --no-install-recommends \
         && rm -rf /var/lib/apt/lists/* odoo.deb
+
+# Install python requirements.txt
+ADD ./requirements.txt /requirements.txt
+RUN pip3 install -r /requirements.txt 
 
 # Copy entrypoint script and Odoo configuration file
 RUN pip3 install num2words xlwt
