@@ -1,7 +1,3 @@
-# [submodule "addons/enterprise"]
-# 	path = addons/enterprise
-# 	url = git@github.com:Aselcis-Consulting/enterprise.git
-# 	branch = 11.0
 [submodule "addons/OCA/account-analytic"]
 	path = addons/OCA/account-analytic
 	url = https://github.com/OCA/account-analytic.git
@@ -157,10 +153,6 @@
 [submodule "addons/OCA/server-ux"]
 	path = addons/OCA/server-ux
 	url = https://github.com/OCA/server-ux.git
-	branch = 11.0
-[submodule "addons/Aselcis-Consulting/asoo-tools"]
-	path = addons/Aselcis-Consulting/asoo-tools
-	url = https://github.com/Aselcis-Consulting/asoo-tools.git
 	branch = 11.0
 [submodule "addons/OCA/account-financial-tools"]
 	path = addons/OCA/account-financial-tools
