@@ -1,7 +1,3 @@
-# deploy_info:
-#   private_submodules:
-#     - git@github.com:Aselcis-Consulting/enterprise.git
-
 server_setup:
   update:
     sudo: true
