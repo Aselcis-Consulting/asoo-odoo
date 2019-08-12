@@ -1,0 +1,33 @@
+format: 'tar.bz2'
+ensure_start: true
+script:
+  dump:
+    description: 'Dumping PostgreSQL'
+    sudo: true
+    commands:
+      - 'docker-compose exec -T db pg_dumpall -U odoo > ${workspace}/dump.sql'
+  filestore:
+    description: 'Copying Odoo filestore'
+    sudo: true
+    commands:
+      - 'docker cp ${object.docker_container_id("web")}:/var/lib/odoo/filestore ${workspace}/filestore'
+  tar:
+    description: 'Compressing backup'
+    sudo: True
+    commands:
+      - 'cd ${backups_dir} && tar -cvjf ${filename} ${backup_name}/. &>/dev/null'
+  rm_workspace:
+    description: 'Removing workspace'
+    sudo: true
+    commands:
+      - 'rm -dfr ${workspace}'
+  upload:
+    description: 'Uploading backup'
+    sudo: true
+    commands:
+      - 'swift --os-auth-token ${container.openstack_token} --os-storage-url ${container.openstack_url} upload ${container.name} ${backups_dir}/${filename} --object-name ${filename}'
+  rm_backup:
+    description: 'Removing backup file'
+    sudo: true
+    commands:
+      - 'rm -dfr ${backups_dir}/${filename}'

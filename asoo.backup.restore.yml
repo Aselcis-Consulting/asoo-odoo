@@ -1,0 +1,35 @@
+format: 'tar.bz2'
+ensure_start: true
+after_restart: true
+remove_volumes: true
+script:
+  download:
+    description: 'Downloading backup file'
+    sudo: true
+    commands:
+      - 'rm -fr ${workspace}/${object_storage.name}'
+      - 'cd ${workspace} && swift --os-auth-token ${container.openstack_token} --os-storage-url ${container.openstack_url} download ${container.name} ${object_storage.name} -o ${object_storage.name}'
+  untar:
+    description: 'Decompressing backup'
+    sudo: true
+    commands:
+      - 'tar -xvjf ${workspace}/${object_storage.name} -C ${workspace} &>/dev/null'
+      - 'rm -fr ${workspace}/${object_storage.name}'
+  dump:
+    description: 'Restoring PostgreSQL dump'
+    sudo: true
+    commands:
+      - 'docker cp ${backup_content}/dump.sql ${object.docker_container_id("db")}:/'
+      - 'docker-compose exec -T db psql -U odoo -d postgres -f /dump.sql'
+      - 'docker-compose exec -T -u 0 db rm /dump.sql'
+  filestore:
+    description: 'Restoring Odoo filestore'
+    sudo: true
+    commands:
+      - 'docker cp ${backup_content}/filestore/. ${object.docker_container_id("web")}:/var/lib/odoo/filestore'
+      - 'docker-compose exec -T -u 0 web chown -R odoo:odoo /var/lib/odoo/filestore'
+  clean:
+    description: 'Cleaning leftovers from the backup'
+    sudo: true
+    commands:
+      - 'rm -dfr ${workspace}'
