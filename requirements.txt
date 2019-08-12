@@ -18,4 +18,3 @@ pysftp==0.2.9
 acme-tiny==4.0.4
 IPy==0.83
 bokeh==0.12.7
-openupgradelib==2.0.0

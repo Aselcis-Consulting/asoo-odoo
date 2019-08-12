@@ -162,3 +162,7 @@
 	path = addons/Aselcis-Consulting/asoo-tools
 	url = https://github.com/Aselcis-Consulting/asoo-tools.git
 	branch = 11.0
+[submodule "addons/enterprise"]
+	path = addons/enterprise
+	url = git@github.com:Aselcis-Consulting/enterprise.git
+	branch = 11.0
