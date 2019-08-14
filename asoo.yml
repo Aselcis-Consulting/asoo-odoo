@@ -24,8 +24,7 @@ server_setup:
   docker-compose:
     sudo: true
     commands:
-      - 'apt -y install python-pip'
-      - 'pip install docker-compose'
+      - 'apt -y install docker-compose'
   workspace-chmod:
     sudo: true
     commands:
