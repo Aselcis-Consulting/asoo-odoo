@@ -62,10 +62,6 @@
 	path = addons/OCA/manufacture
 	url = https://github.com/OCA/manufacture.git
 	branch = 13.0
-[submodule "addons/OCA/mis-builder"]
-	path = addons/OCA/mis-builder
-	url = https://github.com/OCA/mis-builder.git
-	branch = 13.0
 [submodule "addons/OCA/multi-company"]
 	path = addons/OCA/multi-company
 	url = https://github.com/OCA/multi-company.git
