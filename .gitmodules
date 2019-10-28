@@ -154,3 +154,7 @@
 	path = addons/OCA/pos
 	url = https://github.com/OCA/pos.git
 	branch = 10.0
+[submodule "addons/enterprise"]
+	path = addons/enterprise
+	url = git@github.com:Aselcis-Consulting/enterprise.git
+	branch = 10.0
