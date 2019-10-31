@@ -46,6 +46,9 @@ environment_info:
     - 'docker-compose.yml'
     - 'config/odoo.conf'
     - 'config/odoo-test.conf'
+  rebuild_files:
+    - 'Dockerfile'
+    - 'requirements.txt'
 
 environment_setup:
   entrypoint_chmod:
