@@ -25,7 +25,7 @@ script:
     description: 'Uploading backup'
     sudo: true
     commands:
-      - 'swift --os-auth-token ${container.openstack_token} --os-storage-url ${container.openstack_url} upload ${container.name} ${backups_dir}/${filename} --object-name ${filename}'
+      - 'swift --os-auth-token ${container.openstack_token} --os-storage-url ${container.openstack_url} upload ${container.name} ${backups_dir}/${filename} --object-name ${filename} -S 1073741824 --segment-container ${container.name} --use-slo'
   rm_backup:
     description: 'Removing backup file'
     sudo: true
