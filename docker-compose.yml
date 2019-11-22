@@ -2,6 +2,7 @@ version: '3.3'
 services:
   web:
     build: .
+    restart: always
     depends_on:
       - db
     ports:
@@ -21,6 +22,7 @@ services:
         max-size: 150m
   db:
     image: 'postgres:10'
+    restart: always
     ports:
       - '5432'
     environment:
