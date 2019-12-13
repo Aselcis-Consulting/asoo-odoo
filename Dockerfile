@@ -63,7 +63,16 @@ RUN set -x; \
 
 # Install python requirements.txt
 ADD ./requirements.txt /requirements.txt
-RUN pip3 install -r /requirements.txt 
+RUN pip3 install -r /requirements.txt
+
+# Override Odoo files
+COPY ./odoo/sql_db.py /usr/lib/python3/dist-packages/odoo/sql_db.py
+COPY ./odoo/config.py /usr/lib/python3/dist-packages/odoo/tools/config.py
+
+# Copy PostgreSQL certificates
+RUN mkdir -p /postgres-certs
+COPY ./certs /postgres-certs
+RUN chown -R odoo /postgres-certs
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
