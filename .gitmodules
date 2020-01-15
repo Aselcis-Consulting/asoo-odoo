@@ -146,10 +146,6 @@
 	path = addons/OCA/stock-logistics-barcode
 	url = https://github.com/OCA/stock-logistics-barcode.git
 	branch = 10.0
-[submodule "addons/asoo-tools"]
-	path = addons/asoo-tools
-	url = https://github.com/Aselcis-Consulting/asoo-tools.git
-	branch = 10.0
 [submodule "addons/OCA/pos"]
 	path = addons/OCA/pos
 	url = https://github.com/OCA/pos.git
