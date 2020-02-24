@@ -11,6 +11,10 @@ server_setup:
     sudo: true
     commands:
       - 'apt -y install curl'
+  swift:
+    sudo: true
+    commands:
+      - 'apt -y install python-swiftclient'  
   docker:
     sudo: true
     commands:
