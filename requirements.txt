@@ -1,5 +1,5 @@
 # Odoo 13.0
-firebase-admin==3.0.0
+firebase-admin
 # OCA/l10n-spain
 phonenumbers
 # OCA/connector
