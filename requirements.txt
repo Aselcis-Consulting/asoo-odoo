@@ -1,3 +1,19 @@
-firebase-admin==3.0.0
+# Odoo 13.0
+firebase-admin
+# OCA/l10n-spain
 phonenumbers
+# OCA/connector
 cachetools>=2.0.1
+bokeh==1.1.0
+# OCA/social
+premailer
+# OCA/web
+bokeh==1.1.0
+matplotlib>=2.0.0
+mpld3==0.3
+# OCA/stock-logistics-warehouse
+cubiscan
+mock
+# OCA/server-ux
+pyzbar
+pdf2image
