@@ -61,12 +61,6 @@ RUN set -x; \
         && apt-get -y install -f --no-install-recommends \
         && rm -rf /var/lib/apt/lists/* odoo.deb
 
-# Install firebase-admin system dependency
-RUN set -x; \
-        curl -o grpcio.deb -sSL http://ftp.de.debian.org/debian/pool/main/g/grpc/python3-grpcio_1.26.0-2+b1_amd64.deb \
-        && dpkg --force-depends -i grpcio.deb \
-        && rm -rf grpcio.deb
-
 # Install python requirements.txt
 ADD ./requirements.txt /requirements.txt
 RUN pip3 install -r /requirements.txt 
