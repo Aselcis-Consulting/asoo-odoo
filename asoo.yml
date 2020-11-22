@@ -38,7 +38,7 @@ server_setup:
 
 environment_info:
   application: 'odoo'
-  application_version: '13.0'
+  application_version: '14.0'
   application_service: 'web'
   application_container_user: '0'
   git_submodule_path: 'addons'
