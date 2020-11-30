@@ -1,4 +1,4 @@
-libxml2==2.9.0
+libxml2==2.9.7
 unidecode==0.4.19
 unicodecsv==0.14.1
 python-stdnum==1.1
