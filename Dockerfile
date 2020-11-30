@@ -44,7 +44,7 @@ RUN set -x; \
 RUN set -x; \
   mkdir /deb_depends \
   && curl -o /deb_depends/libxslt1.1.deb -SL http://ftp.de.debian.org/debian/pool/main/libx/libxslt/libxslt1.1_1.1.28-2+deb8u3_amd64.deb \
-  && curl -o /deb_depends/libxml2.deb -SL http://security.debian.org/debian-security/pool/updates/main/libx/libxml2/libxml2_2.9.1+dfsg1-5+deb8u7_amd64.deb \
+  && curl -o /deb_depends/libxml2.deb -SL http://security.debian.org/debian-security/pool/updates/main/libx/libxml2/libxml2_2.9.1+dfsg1-5+deb8u8_amd64.deb \
   && curl -o /deb_depends/python-crypto.deb -SL http://ftp.de.debian.org/debian/pool/main/p/python-crypto/python-crypto_2.6.1-5+deb8u1_amd64.deb \
   && curl -o /deb_depends/libssl-dev.deb -SL http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl-dev_1.0.1t-1+deb8u12_amd64.deb \
   && curl -o /deb_depends/libffi-dev.deb -SL http://ftp.de.debian.org/debian/pool/main/libf/libffi/libffi-dev_3.1-2+deb8u1_amd64.deb \
