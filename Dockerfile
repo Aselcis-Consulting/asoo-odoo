@@ -53,7 +53,7 @@ RUN set -x; \
   && curl -o /deb_depends/libavahi-common3.deb -SL http://ftp.de.debian.org/debian/pool/main/a/avahi/libavahi-common3_0.6.31-5_amd64.deb \
   && curl -o /deb_depends/libdbus-1-3.deb -SL http://ftp.de.debian.org/debian/pool/main/d/dbus/libdbus-1-3_1.8.22-0+deb8u1_amd64.deb \
   && curl -o /deb_depends/libavahi-common-data.deb -SL http://ftp.de.debian.org/debian/pool/main/a/avahi/libavahi-common-data_0.6.31-5_amd64.deb \
-  && curl -o /deb_depends/libcups2.deb -SL http://security.debian.org/debian-security/pool/updates/main/c/cups/libcups2_1.7.5-11+deb8u6_amd64.deb \
+  && curl -o /deb_depends/libcups2.deb -SL http://security.debian.org/debian-security/pool/updates/main/c/cups/libcups2_1.7.5-11+deb8u8_amd64.deb \
   && curl -o /deb_depends/python-cups.deb -SL http://ftp.de.debian.org/debian/pool/main/p/python-cups/python-cups_1.9.73-2+b1_amd64.deb \
   && dpkg --force-depends -i /deb_depends/*.deb \
   && apt-get update \
