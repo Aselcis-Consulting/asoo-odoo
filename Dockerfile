@@ -62,6 +62,7 @@ RUN set -x; \
         && rm -rf /var/lib/apt/lists/* odoo.deb
 
 # Install python requirements.txt
+RUN pip3 install --upgrade pip
 ADD ./requirements.txt /requirements.txt
 RUN pip3 install -r /requirements.txt 
 
