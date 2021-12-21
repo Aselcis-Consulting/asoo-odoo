@@ -1,5 +1,4 @@
 # OCA/l10n-spain
-phonenumbers
 # OCA/connector
 cachetools>=2.0.1
 bokeh>=1.1.0
@@ -39,15 +38,12 @@ python-barcode
 python-dateutil
 python-stdnum
 python-stdnum
-qrcode
 raven
-requests
 requests
 unidecode
 vatnumber
 xlrd
 xlsxwriter
-xlwt
 xmlsig
 xmltodict
 zeep
