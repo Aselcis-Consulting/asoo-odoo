@@ -2,16 +2,52 @@
 phonenumbers
 # OCA/connector
 cachetools>=2.0.1
-bokeh==1.1.0
+bokeh>=1.1.0
 # OCA/social
 premailer
 # OCA/web
-bokeh==1.1.0
 matplotlib>=2.0.0
-mpld3==0.3
+mpld3>=0.3
 # OCA/stock-logistics-warehouse
 cubiscan
 mock
 # OCA/server-ux
 pyzbar
 pdf2image
+openupgradelib
+acme
+astor
+chardet
+cryptography
+dataclasses
+dnspython
+email-validator
+josepy
+lxml
+num2words                              
+odoorpc
+ofxparse
+openpyxl
+plotly
+py3o.formats
+py3o.template
+pycountry
+pycrypto
+PyPDF2
+pysftp
+python-barcode
+python-dateutil
+python-stdnum
+python-stdnum
+qrcode
+raven
+requests
+requests
+unidecode
+vatnumber
+xlrd
+xlsxwriter
+xlwt
+xmlsig
+xmltodict
+zeep
