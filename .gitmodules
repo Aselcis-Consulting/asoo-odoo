@@ -154,3 +154,7 @@
 	path = addons/Aselcis-Consulting/asoo-tools
 	url = https://github.com/Aselcis-Consulting/asoo-tools.git
 	branch = 15.0
+[submodule "addons/OCA/community-data-files"]
+	path = addons/OCA/community-data-files
+	url = https://github.com/OCA/community-data-files.git
+	branch = 15.0
