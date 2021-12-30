@@ -130,10 +130,6 @@
 	path = addons/OCA/web
 	url = https://github.com/OCA/web.git
 	branch = 15.0
-[submodule "addons/OCA/community-data-files"]
-	path = addons/OCA/community-data-files
-	url = https://github.com/OCA/community-data-files.git
-	branch = 15.0	
 [submodule "addons/OCA/account-financial-tools"]
 	path = addons/OCA/account-financial-tools
 	url = https://github.com/OCA/account-financial-tools.git
