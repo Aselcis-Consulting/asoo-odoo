@@ -37,7 +37,6 @@ pysftp
 python-barcode
 python-dateutil
 python-stdnum
-python-stdnum
 raven
 requests
 unidecode
