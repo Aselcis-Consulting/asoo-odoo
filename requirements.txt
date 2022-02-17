@@ -31,7 +31,7 @@ plotly
 py3o.formats
 py3o.template
 pycountry
-pycrypto
+#pycrypto
 PyPDF2
 pysftp
 python-barcode
