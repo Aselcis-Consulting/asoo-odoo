@@ -31,7 +31,7 @@ RUN set -x; \
         && echo '7e35a63f9db14f93ec7feeb0fce76b30c08f2057 wkhtmltox.deb' | sha1sum -c - \
         && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
         && rm -rf /var/lib/apt/lists/* wkhtmltox.deb \
-        && pip3 install --upgrade pip
+        && /usr/bin/python3 -m pip install --upgrade pip
 
 # install latest postgresql-client
 RUN set -x; \
