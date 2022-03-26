@@ -63,7 +63,8 @@ RUN set -x; \
 
 # Install python requirements.txt
 ADD ./requirements.txt /requirements.txt
-RUN pip3 install -r /requirements.txt 
+RUN pip3 install -r /requirements.txt \
+        && pip3 install reportlab --upgrade
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
