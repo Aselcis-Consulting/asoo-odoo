@@ -47,3 +47,4 @@ xlsxwriter
 xmlsig
 xmltodict
 zeep
+google-auth
