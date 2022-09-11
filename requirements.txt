@@ -15,3 +15,4 @@ mock
 # OCA/server-ux
 pyzbar
 pdf2image
+cryptography
