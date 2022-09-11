@@ -16,3 +16,4 @@ mock
 pyzbar
 pdf2image
 cryptography
+unidecode
