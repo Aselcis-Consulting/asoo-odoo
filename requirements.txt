@@ -17,3 +17,11 @@ pyzbar
 pdf2image
 cryptography
 unidecode
+vatnumber
+xlrd
+xlsxwriter
+xmlsig
+xmltodict
+zeep
+dicttoxml
+openupgradelib
