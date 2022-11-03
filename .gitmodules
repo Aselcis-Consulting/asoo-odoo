@@ -10,10 +10,6 @@
 	path = addons/OCA/l10n-spain
 	url = https://github.com/OCA/l10n-spain.git
 	branch = 16.0
-[submodule "addons/OCA/pos"]
-	path = addons/OCA/pos
-	url = https://github.com/OCA/pos.git
-	branch = 16.0
 [submodule "addons/OCA/queue"]
 	path = addons/OCA/queue
 	url = https://github.com/OCA/queue.git
