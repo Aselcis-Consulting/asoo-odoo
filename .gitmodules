@@ -1,44 +1,4 @@
-[submodule "addons/OCA/account-payment"]
-	path = addons/OCA/account-payment
-	url = https://github.com/OCA/account-payment.git
-	branch = 16.0
-[submodule "addons/OCA/bank-statement-import"]
-	path = addons/OCA/bank-statement-import
-	url = https://github.com/OCA/bank-statement-import.git
-	branch = 16.0
-[submodule "addons/OCA/l10n-spain"]
-	path = addons/OCA/l10n-spain
-	url = https://github.com/OCA/l10n-spain.git
-	branch = 16.0
-[submodule "addons/OCA/queue"]
-	path = addons/OCA/queue
-	url = https://github.com/OCA/queue.git
-	branch = 16.0
-[submodule "addons/OCA/server-ux"]
-	path = addons/OCA/server-ux
-	url = https://github.com/OCA/server-ux.git
-	branch = 16.0
-[submodule "addons/OCA/web"]
-	path = addons/OCA/web
-	url = https://github.com/OCA/web.git
-	branch = 16.0
-[submodule "addons/OCA/account-financial-tools"]
-	path = addons/OCA/account-financial-tools
-	url = https://github.com/OCA/account-financial-tools.git
-	branch = 16.0
-[submodule "addons/OCA/server-tools"]
-	path = addons/OCA/server-tools
-	url = https://github.com/OCA/server-tools.git
-	branch = 16.0
 [submodule "addons/enterprise"]
 	path = addons/enterprise
 	url = git@github.com:Aselcis-Consulting/enterprise.git
-	branch = 16.0
-[submodule "addons/Aselcis-Consulting/asoo-tools"]
-	path = addons/Aselcis-Consulting/asoo-tools
-	url = https://github.com/Aselcis-Consulting/asoo-tools.git
-	branch = 16.0
-[submodule "addons/OCA/community-data-files"]
-	path = addons/OCA/community-data-files
-	url = https://github.com/OCA/community-data-files.git
 	branch = 16.0
