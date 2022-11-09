@@ -21,7 +21,7 @@ services:
       options:
         max-size: 150m
   db:
-    image: 'postgres:10'
+    image: 'postgres:14'
     restart: always
     ports:
       - '5432'
