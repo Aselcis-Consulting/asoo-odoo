@@ -1,6 +1,6 @@
 # OCA/l10n-spain
 # OCA/connector
-setuptools==58.0.0
+setuptools==65.5.1
 cachetools>=2.0.1
 bokeh>=1.1.0
 # OCA/social
